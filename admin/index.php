@@ -92,36 +92,43 @@ if (isset($_POST['save'])) {
             border: 1px solid #ddd;
             box-shadow: none;
             transition: border-color 0.3s ease;
-            padding: 15px;
-            font-size: 1.2rem;
+            padding: 10px 15px; /* Reduced padding to make the input field smaller */
+            font-size: 1rem; /* Reduced font size for smaller text */
+            width: 70%;
         }
 
         .form-control:focus {
             border-color: #6c5ce7;
             box-shadow: 0 0 5px rgba(108, 92, 231, 0.5);
         }
-/* Add margin to the bottom of the password field or login button */
-.form-group:last-of-type {
-    margin-bottom: 20px; /* Adjust this value to control the space */
-}
 
-.btn-primary {
-    width: 100%;
-    padding: 12px;
-    border-radius: 30px;
-    background-color: #6c5ce7;
-    border: none;
-    font-size: 1.1rem;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
-    margin-top: 20px; /* This adds space above the login button */
-}
+        .form-group {
+            margin-bottom: 20px;
+        }
 
-.btn-primary:hover {
-    background-color: #00b894;
-    cursor: pointer;
-}
+        /* Add margin to the bottom of the password field or login button */
+        .form-group:last-of-type {
+            margin-bottom: 20px; /* Adjust this value to control the space */
+        }
 
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border-radius: 30px;
+            background-color: #6c5ce7;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            margin-top: 20px; 
+        }
+
+        .btn:hover {
+            background-color: #00b894;
+            cursor: pointer;
+            color: white;
+            font-weight: 900;
+        }
 
         .alert {
             margin-bottom: 20px;
@@ -175,7 +182,7 @@ if (isset($_POST['save'])) {
                 <input type="password" class="form-control" id="inputPassword" placeholder="Enter your password" name="p" value="<?php echo htmlspecialchars($p ?? ''); ?>" required />
             </div>
 
-            <button type="submit" name="save" class="btn btn-primary">Login</button>
+            <button type="submit" name="save" class="btn">Login</button>
 
             <div class="forgot-password">
                 <a href="#">Forgot your password?</a>

@@ -27,129 +27,203 @@ if (isset($update)) {
 }
 ?>
 
-<script>
-function showSemester(str)
-{
-    if (str == "") {
-        document.getElementById("txtHint").innerHTML = "";
-        return;
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Student Profile</title>
 
-    var xmlhttp;
-    if (window.XMLHttpRequest) {
-        xmlhttp = new XMLHttpRequest();
-    } else {
-        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            document.getElementById("semester").innerHTML = xmlhttp.responseText;
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            font-family: 'Nunito', sans-serif;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0px;
         }
-    }
-    xmlhttp.open("GET", "updatestudent_ajax.php?id=" + str, true);
-    xmlhttp.send();
-}
-</script>
 
-<div class="row">
-    <div class="col-sm-8">
-        <h2><font color="#FFFFFF">Update Student Profile</font></h2>
+        .glass-card {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            max-width: 700px;
+            width: 100%;
+        }
+
+        .glass-card h2 {
+            text-align: center;
+            color: #ffd700;
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: 500;
+            box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-control:focus {
+            border-color: #ffd700;
+            box-shadow: 0 0 10px #ffd700;
+        }
+
+        select.form-control {
+            appearance: none;
+            padding-right: 30px;
+            background-image: url('https://img.icons8.com/ios/50/ffffff/expand-arrow.png');
+            background-repeat: no-repeat;
+            background-position: calc(100% - 10px) center;
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, #ff9900, #ff6600);
+            border: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 50px;
+            transition: transform 0.3s ease-in-out;
+            box-shadow: 0px 4px 10px rgba(255, 153, 0, 0.5);
+        }
+
+        .btn-success:hover {
+            transform: scale(1.1);
+            background: linear-gradient(45deg, #ff6600, #ff9900);
+        }
+
+        label {
+            font-weight: bold;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="glass-card">
+        <h2><i class="fas fa-user-edit"></i> Update Student Profile</h2>
         <form method="POST" enctype="multipart/form-data">
-            <table border="0" class="table">
-                <tr>
-                    <td colspan="2"><?php echo @$err; ?></td>
-                </tr>
+            <div class="mb-3">
+                <label for="course">Department Name</label>
+                <select name="course" id="course" onChange="showSemester(this.value)" class="form-control">
+                    <?php 
+                    $cou = mysqli_query($con, "SELECT * FROM department");
+                    while ($c = mysqli_fetch_array($cou)) {
+                        $c_id = $c[0];
+                    ?>
+                        <option value='<?php echo $c_id; ?>' <?php if ($c_id == $res['department_id']) { echo "selected"; } ?>>
+                            <?php echo $c[1]; ?>
+                        </option>
+                    <?php } ?>
+                </select>
+            </div>
 
-                <tr>
-                    <th width="237" scope="row"><font color="#FFFFFF" size="+2">Department Name</font></th>
-                    <td width="213">
-                        <select name="course" onChange="showSemester(this.value)" class="form-control">
-                            <?php 
-                            $cou = mysqli_query($con, "SELECT * FROM department");
-                            while ($c = mysqli_fetch_array($cou)) {
-                                $c_id = $c[0];
-                            ?>
-                                <option value='<?php echo $c_id; ?>' <?php if ($c_id == $res['department_id']) { echo "selected"; } ?>>
-                                    <?php echo $c[1]; ?>
-                                </option>
-                            <?php } ?>
-                        </select>
-                    </td>
-                </tr>
+            <div class="mb-3">
+                <label for="semester">Semester Name</label>
+                <select name="semester" id="semester" class="form-control">
+                    <?php 
+                    $sem = mysqli_query($con, "SELECT * FROM semester WHERE department_id='" . $res['department_id'] . "'");
+                    while ($s = mysqli_fetch_array($sem)) {
+                        $s_id = $s[0];
+                    ?>
+                        <option value='<?php echo $s_id; ?>' <?php if ($s_id == $res['sem_id']) { echo "selected"; } ?>>
+                            <?php echo $s[1]; ?>
+                        </option>
+                    <?php } ?>
+                </select>
+            </div>
 
-                <tr>
-                    <th width="237" scope="row"><font color="#FFFFFF" size="+2">Semester Name</font></th>
-                    <td width="213">
-                        <select name="semester" id="semester" class="form-control">
-                            <?php 
-                            $sem = mysqli_query($con, "SELECT * FROM semester WHERE department_id='" . $res['department_id'] . "'");
-                            while ($s = mysqli_fetch_array($sem)) {
-                                $s_id = $s[0];
-                            ?>
-                                <option value='<?php echo $s_id; ?>' <?php if ($s_id == $res['sem_id']) { echo "selected"; } ?>>
-                                    <?php echo $s[1]; ?>
-                                </option>
-                            <?php } ?>
-                        </select>
-                    </td>
-                </tr>
+            <div class="mb-3">
+                <label for="name">Student Name</label>
+                <input type="text" name="name" class="form-control" placeholder="Enter your name" value="<?php echo $res['name']; ?>" />
+            </div>
 
-                <tr>
-                    <th width="237" scope="row"><font color="#FFFFFF" size="+2">Student Name</font></th>
-                    <td width="213"><input type="text" name="name" class="form-control" placeholder="Enter your name" value="<?php echo $res['name']; ?>"/></td>
-                </tr>
+            <div class="mb-3">
+                <label for="eid">Email</label>
+                <input type="email" name="eid" class="form-control" placeholder="Enter your email" value="<?php echo $res['eid']; ?>" />
+            </div>
 
-                <tr>
-                    <th scope="row"><font color="#FFFFFF" size="+2">Enter Your Email</font></th>
-                    <td><input type="email" name="eid" class="form-control" placeholder="Enter your email" value="<?php echo $res['eid']; ?>" /></td>
-                </tr>
+            <div class="mb-3">
+                <label for="p">Password</label>
+                <input type="password" name="p" class="form-control" placeholder="Enter your password" value="<?php echo $res['password']; ?>" />
+            </div>
 
-                <tr>
-                    <th scope="row"><font color="#FFFFFF" size="+2">Enter Your Password</font></th>
-                    <td><input type="password" name="p" class="form-control" placeholder="Enter your password" value="<?php echo $res['password']; ?>" /></td>
-                </tr>
+            <div class="mb-3">
+                <label for="mobile">Mobile</label>
+                <input type="number" name="mobile" class="form-control" placeholder="Enter your mobile" value="<?php echo $res['mob']; ?>" />
+            </div>
 
-                <tr>
-                    <th scope="row"><font color="#FFFFFF" size="+2">Enter Your Mobile</font></th>
-                    <td><input type="number" name="mobile" class="form-control" placeholder="Enter your mobile" value="<?php echo $res['mob']; ?>"/></td>
-                </tr>
+            <div class="mb-3">
+                <label for="address">Address</label>
+                <input type="text" name="address" class="form-control" placeholder="Enter your address" value="<?php echo $res['address']; ?>" />
+            </div>
 
-                <tr>
-                    <th scope="row"><font color="#FFFFFF" size="+2">Enter Your Address</font></th>
-                    <td><input type="text" name="address" class="form-control" placeholder="Enter your address" value="<?php echo $res['address']; ?>" /></td>
-                </tr>
+            <div class="mb-3">
+                <label for="dob">D.O.B</label>
+                <input type="date" name="dob" class="form-control" value="<?php echo $res['dob']; ?>" />
+            </div>
 
-                <tr>
-                    <th scope="row"><font color="#FFFFFF" size="+2">Enter Your D.O.B</font></th>
-                    <td><input type="date" name="dob" class="form-control" placeholder="Enter your D.O.B" value="<?php echo $res['dob']; ?>"/></td>
-                </tr>
+            <div class="mb-3">
+                <label for="pic">Profile Picture</label>
+                <input type="file" name="pic" class="form-control" />
+            </div>
 
-                <tr>
-                    <th scope="row"><font color="#FFFFFF" size="+2">Enter Your Pic</font></th>
-                    <td><input type="file" name="pic" class="form-control" placeholder="Enter your pic" value="<?php echo $res['pic']; ?>"/></td>
-                </tr>
-
-                <tr>
-                    <th scope="row"><font color="#FFFFFF" size="+2">Enter Your Gender</font></th>
-                    <td><font color="#FFFFFF">Male</font>
+            <div class="mb-3">
+                <label>Gender</label>
+                <div>
+                    <label>
                         <input type="radio" value="m" id="gen" name="gen" <?php if ($res['gender'] == "m") { echo "checked"; } ?> />
-                        <font color="#FFFFFF">Female</font>
+                        Male
+                    </label>
+                    <label class="ms-3">
                         <input type="radio" value="f" id="gen" name="gen" <?php if ($res['gender'] == "f") { echo "checked"; } ?> />
-                    </td>
-                </tr>
+                        Female
+                    </label>
+                </div>
+            </div>
 
-                <tr>
-                    <th scope="row"><font color="#FFFFFF" size="+2">Status</font></th>
-                    <td><input type="text" name="status" class="form-control" placeholder="Enter your status" value="<?php echo $res['status']; ?>"/></td>
-                </tr>
+            <div class="mb-3">
+                <label for="status">Status</label>
+                <input type="text" name="status" class="form-control" placeholder="Enter your status" value="<?php echo $res['status']; ?>" />
+            </div>
 
-                <tr>
-                    <th colspan="2" scope="row" align="center">
-                        <input type="submit" value="Update Records" name="update" class="btn btn-success"/>
-                    </th>
-                </tr>
-            </table>
+            <div class="text-center">
+                <button type="submit" name="update" class="btn btn-success">Update Records</button>
+            </div>
         </form>
     </div>
-</div>
+
+    <script>
+        function showSemester(str) {
+            if (str == "") {
+                document.getElementById("semester").innerHTML = "";
+                return;
+            }
+            const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function () {
+                document.getElementById("semester").innerHTML = this.responseText;
+            };
+            xmlhttp.open("GET", "semester_ajax.php?q=" + str);
+            xmlhttp.send();
+        }
+    </script>
+</body>
+</html>

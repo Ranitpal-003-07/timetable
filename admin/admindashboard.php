@@ -26,7 +26,7 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] == "") {
     <title>Time Table Admin Dashboard</title>
 
     <!-- Bootstrap CSS -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <!-- Custom CSS -->
@@ -34,43 +34,55 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] == "") {
         body {
             background-color: #f0f2f5;
         }
+
         #wrapper {
             display: flex;
             min-height: 100vh;
         }
+
         .navbar {
-            background-color: #212529 !important;
+            background: linear-gradient(225deg,rgb(67, 1, 235),rgb(145, 126, 255),rgb(164, 164, 255),rgb(202, 202, 255),lavender);
             padding: 1rem;
         }
+
         .navbar p {
-            margin-bottom: 3rem; ;
-            color: #FFFFFF;
-            font-weight: 500;
+            margin-bottom: 3rem;
+            color: white;
+            font-weight: 700;
         }
+
         .side-nav {
-            background-color: #333;
+            background: linear-gradient(135deg,rgb(67, 1, 235),rgb(145, 126, 255),rgb(164, 164, 255),rgb(202, 202, 255),lavender);
             min-height: 100vh;
             width: 250px;
-            padding-top: 1rem;
+            padding: .5rem;
+            padding-top: 3rem;
             padding-left: 0.5rem;
         }
+
         .side-nav a {
-            color: #cfd2da;
+            color: white;
             padding: 0.75rem 1rem;
             display: block;
-            font-size: 1.1rem;
-            font-weight: 500;
+            font-size: 1.2rem;
+            font-weight: 600;
             border-radius: 0.3rem;
-        }
-        .side-nav a:hover {
-            background-color: #495057;
-            color: #fff;
             text-decoration: none;
         }
+
+        .side-nav a:hover {
+            background-color: beige;
+            font-size: 1.4rem;
+            color: black;
+            transition: .4s ease-in;
+            text-decoration: none;
+        }
+
         .content-wrapper {
             flex: 1;
             padding: 0rem;
         }
+
         .img-dashboard {
             margin-top: 2rem;
             border-radius: 10px;
@@ -78,6 +90,7 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] == "") {
             max-width: 100%;
             height: auto;
         }
+
         .admin-title {
             font-family: "Lucida Console", Monaco, monospace;
             color: #dc3545;
@@ -85,6 +98,11 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] == "") {
             text-align: center;
             margin-top: 2rem;
         }
+        .text{
+            font-weight: 700;
+            color: navy;
+        }
+
     </style>
 </head>
 
@@ -106,7 +124,7 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] == "") {
         <div class="content-wrapper">
             <nav class="navbar navbar-expand-lg navbar-dark">
                 <div class="container-fluid">
-                    <span class="navbar-brand text-white">Hello Admin</span>
+                    <span class="navbar-brand text">Hello Admin</span>
                     <div class="d-flex">
                         <a href="logout.php" class="btn btn-outline-light">Logout <i class="fas fa-sign-out-alt"></i></a>
                     </div>
@@ -115,7 +133,6 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] == "") {
 
             <div class="container-fluid">
 
-                <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <?php 
@@ -165,16 +182,12 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] == "") {
                         <?php } ?>
                     </div>
                 </div>
-                <!-- /.row -->
 
             </div>
-            <!-- /.container-fluid -->
 
         </div>
-        <!-- /.content-wrapper -->
 
     </div>
-    <!-- /#wrapper -->
 
 </body>
 
