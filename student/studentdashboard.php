@@ -159,6 +159,9 @@ if (empty($_SESSION['stu_id']) || empty($_SESSION['name'])) {
             <a href="studentdashboard.php?info=timeschedule"><i class="fa fa-calendar-alt me-2"></i>Time Schedule</a>
             <a href="studentdashboard.php?info=updateprofile&img=<?php echo $img; ?>"><i class="fa fa-user-edit me-2"></i>Update Profile</a>
             <a href="studentdashboard.php?info=updatepassword"><i class="fa fa-lock me-2"></i>Update Password</a>
+            <a href="studentdashboard.php?info=viewmarks"><i class="fa fa-graduation-cap me-2"></i>View Marks</a>
+            <a href="studentdashboard.php?info=viewannouncements"><i class="fa fa-bell me-2"></i>View Announcements</a>
+            <a href="studentdashboard.php?info=submitcomplaint"><i class="fa fa-exclamation-triangle me-2"></i>Submit Complaint</a>
         </div>
 
         <!-- Main Content -->
@@ -181,6 +184,12 @@ if (empty($_SESSION['stu_id']) || empty($_SESSION['name'])) {
                         include('updateprofile.php');
                     } elseif ($info == "timeschedule") {
                         include('timeschedule.php');
+                    } elseif ($info == "viewmarks") {
+                        include('viewmarks.php');
+                    } elseif ($info == "viewannouncements") {
+                        include('view_announcements.php');  // Include the view announcements page
+                    } elseif ($info == "submitcomplaint") {
+                        include('submit_complaint.php');  // Include the submit complaint page
                     }
                 } else {
                 ?>

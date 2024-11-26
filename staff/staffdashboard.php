@@ -113,12 +113,14 @@ if(empty($_SESSION['teacher_id']) || empty($_SESSION['name'])) {
     <!-- Sidebar -->
     <div class="side-nav">
         <div class="profile text-center">
-            <img src="image/profile.jpg" alt="Profile Picture" width="100" height="100">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile Picture" width="100" height="100">
             <h5><?php echo $_SESSION['name']; ?></h5>
         </div>
         <a href="staffdashboard.php?info=timeschedule"><i class="fa fa-calendar-alt me-2"></i> Time Schedule</a>
         <a href="staffdashboard.php?info=updateprofile"><i class="fa fa-user-edit me-2"></i> Update Profile</a>
         <a href="staffdashboard.php?info=updatepassword"><i class="fa fa-lock me-2"></i> Update Password</a>
+        <a href="staffdashboard.php?info=marks"><i class="fa fa-pencil-alt me-2"></i> Marks</a>
+        <a href="staffdashboard.php?info=addannouncement"><i class="fa fa-bullhorn me-2"></i> Add Announcement</a> <!-- New Announcement Section -->
     </div>
 
     <!-- Main Content -->
@@ -133,7 +135,8 @@ if(empty($_SESSION['teacher_id']) || empty($_SESSION['name'])) {
 
             <div class="content mt-4">
                 <?php 
-                @$info = $_REQUEST['info'];
+              
+                @$info = $_GET['info'];
                 if ($info != "") {
                     if ($info == "updatepassword") {
                         include('updatepassword.php');
@@ -141,6 +144,10 @@ if(empty($_SESSION['teacher_id']) || empty($_SESSION['name'])) {
                         include('updateprofile.php');
                     } elseif ($info == "timeschedule") {
                         include('timeschedule.php');
+                    } elseif ($info == "marks") {  
+                        include('marks.php');
+                    } elseif ($info == "addannouncement") {  
+                        include('announcement.php'); // Include Add Announcement section
                     }
                 } else {
                     echo "<h2 class='text-center'>Welcome to the Staff Dashboard</h2>";

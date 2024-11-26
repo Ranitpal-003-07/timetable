@@ -118,6 +118,8 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] == "") {
             <a href="admindashboard.php?info=student"><i class="fa fa-fw fa-user-graduate"></i> Student</a>
             <a href="admindashboard.php?info=teacher"><i class="fa fa-fw fa-chalkboard-teacher"></i> Teacher</a>
             <a href="admindashboard.php?info=add_timetable"><i class="fa fa-fw fa-calendar-plus"></i> Time Table</a>
+            <a href="admindashboard.php?info=announcements"><i class="fa fa-fw fa-bell"></i> Manage Announcements</a>
+            <a href="admindashboard.php?info=complaints"><i class="fa fa-fw fa-comment-alt"></i> Complaints</a>
         </nav>
 
         <!-- Main Content -->
@@ -135,48 +137,53 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] == "") {
 
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <?php 
-                            @$info = $_REQUEST['info'];
-                            if ($info != "") {
-                                if ($info == "course") {
-                                    include('course.php');
-                                } elseif ($info == "semester") {
-                                    include('semester.php');
-                                } elseif ($info == "subject") {
-                                    include('subject.php');
-                                } elseif ($info == "student") {
-                                    include('student.php');
-                                } elseif ($info == "teacher") {
-                                    include('teacher.php');
-                                } elseif ($info == "timetable") {
-                                    include('timetable.php');
-                                } elseif ($info == "add_course") {
-                                    include('add_course.php');
-                                } elseif ($info == "add_subject") {
-                                    include('add_subject.php');
-                                } elseif ($info == "add_semester") {
-                                    include('add_semester.php');
-                                } elseif ($info == "add_teacher") {
-                                    include('add_teacher.php');
-                                } elseif ($info == "add_student") {
-                                    include('add_student.php');
-                                } elseif ($info == "add_timetable") {
-                                    include('add_timetable.php');
-                                } elseif ($info == "updatecourse") {
-                                    include('updatecourse.php');
-                                } elseif ($info == "updatesemester") {
-                                    include('updatesemester.php');
-                                } elseif ($info == "updatesubject") {
-                                    include('updatesubject.php');
-                                } elseif ($info == "updatestudent") {
-                                    include('updatestudent.php');
-                                } elseif ($info == "updateteacher") {
-                                    include('updateteacher.php');
-                                } elseif ($info == "updatetimetable") {
-                                    include('update_timetable.php');
-                                }
-                            } else {
-                        ?>
+                    <?php 
+    @$info = $_REQUEST['info'];
+    if ($info != "") {
+        if ($info == "course") {
+            include('course.php');
+        } elseif ($info == "semester") {
+            include('semester.php');
+        } elseif ($info == "subject") {
+            include('subject.php');
+        } elseif ($info == "student") {
+            include('student.php');
+        } elseif ($info == "teacher") {
+            include('teacher.php');
+        } elseif ($info == "timetable") {
+            include('timetable.php');
+        } elseif ($info == "add_course") {
+            include('add_course.php');
+        } elseif ($info == "add_subject") {
+            include('add_subject.php');
+        } elseif ($info == "add_semester") {
+            include('add_semester.php');
+        } elseif ($info == "add_teacher") {
+            include('add_teacher.php');
+        } elseif ($info == "add_student") {
+            include('add_student.php');
+        } elseif ($info == "add_timetable") {
+            include('add_timetable.php');
+        } elseif ($info == "updatecourse") {
+            include('updatecourse.php');
+        } elseif ($info == "updatesemester") {
+            include('updatesemester.php');
+        } elseif ($info == "updatesubject") {
+            include('updatesubject.php');
+        } elseif ($info == "updatestudent") {
+            include('updatestudent.php');
+        } elseif ($info == "updateteacher") {
+            include('updateteacher.php');
+        } elseif ($info == "updatetimetable") {
+            include('update_timetable.php');
+        } elseif ($info == "announcements") {
+            include('manage_announcements.php');
+        } elseif ($info == "complaints") {
+            include('reply_complaints.php');
+        }
+    } else {
+?>
+
                             <div class="admin-title">Admin Panel</div>
                             <img src="../img/online-practice-exams.jpg" class="img-fluid img-dashboard" alt="Admin Dashboard" width="500">
                         <?php } ?>
